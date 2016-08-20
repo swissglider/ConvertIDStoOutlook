@@ -1,0 +1,16 @@
+{
+  "name": "test",
+  "version": "0.0.1",
+  "description": "Test",
+  "main": "test.js",
+  "dependencies": {
+    "csv": "^1.1.0",
+    "ya-csv": "^0.9.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "swissglider",
+  "license": "ISC"
+}
