@@ -14,6 +14,7 @@ options = {
 
 // parse a CVS by the fileName
 var parseCVS = function(fileName) {
+    // parser.parse();
     return new Promise(
         function(resolve, reject) {
             fs.createReadStream(fileName).pipe(parse(options,
@@ -21,12 +22,20 @@ var parseCVS = function(fileName) {
                     if (error) {
                         reject(error);
                     } else {
-                        resolve(idsEntries)
+                        resolve(idsEntries);
                     }
                 }
             ));
         }
     )
+}
+
+function getMapperFunction(contactArray) {
+    // parser.map();
+    return new Promise(
+        function(resolve, reject) {
+            resolve(contactArray);
+        })
 }
 
 // parseCVS(__dirname + '/SWITZERLAND.csv_org')
@@ -45,22 +54,35 @@ var parsers = [
 
 Promise.all(parsers)
     .then(contactArrays => {
-        var res = [];
-        for(var contacts of contactArrays){
-            console.log('result = ' + contacts[0].GUID);
-            res.push(contacts[0].GUID);
+        var mappers = [];
+        for (var contacts of contactArrays) {
+            mappers.push(getMapperFunction(contacts));
         }
-        return res;
+        return mappers;
     })
-    .then(guid0 =>{
-        Promise.all([
-            function(){return guid0[0]+'-'}(),
-            function(){return guid0[0]+'+'}(),
-        ])
-        .then(guids =>{
-            console.dir(guids);
-        })
-        console.dir(guid0);
+    .then(mappers => {
+        // mapRows
+        return Promise.all(mappers)
+            .then(mappedContactArrays => {
+                // merge all parsed and mapped contact-arrays
+                return [].concat.apply([], mappedContactArrays);;
+            })
+    })
+    .then(mappedContactArray => {
+        // convert Numbers adresses etc
+        // itareates over all converters
+        console.dir('parser, mapped, converted = ' + mappedContactArray[0].GUID);
+        return mappedContactArray;
+    })
+    .then(convertedContactArray => {
+        // filterRows
+        // itareates over all filters
+        console.dir('filtered = ' + convertedContactArray[0].GUID);
+        return convertedContactArray;
+    })
+    .then(filteredContactArray => {
+        // save to new outputFile
+        console.dir('saved = ' + filteredContactArray[0].GUID);
     })
     .catch(err => {
         console.log(err);
