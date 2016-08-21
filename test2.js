@@ -180,7 +180,6 @@ var parser = parse({
 
         if(idsEntries[i].NotExport)
             console.log(idsEntries[i].GUID + ' - ' + idsEntries[i].FirstName + '.' + idsEntries[i].LastName);
-
     }
 });
 
