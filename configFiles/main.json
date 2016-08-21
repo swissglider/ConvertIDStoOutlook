@@ -1,0 +1,9 @@
+{
+  "PARSERS": [
+    {
+      "PARSER_NAME": "IDS_PARSER",
+      "PATH": "./parser/ids_parser.js",
+      "CONFIG_FILE": "configFiles/ids_config.json"
+    }
+  ]
+}

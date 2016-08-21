@@ -1,24 +1,67 @@
-var csv = require('ya-csv');
+var fs = require('fs');
+var parse = require('csv').parse;
 
-var reader = csv.createCsvFileReader('SWITZERLAND.csv', {
-    'separator': '\t',
-    'quote': '"',
-    'escape': '"',
-    'comment': '',
-    'columnsFromHeader': true,
-});
-var writer = new csv.CsvWriter(process.stdout);
-var rowNumber = 0;
-//reader.setColumnNames([ 'col1', 'col2' ]);
-reader.addListener('data', function(data) {
-    //if(data.GUID == 'SESA53272'){
-        //writer.writeRecord([ data]);
-        console.log('-' + data.FirstName + '.' + data.LastName + ' - ' + data.OfficePhoneNumber);
-    //}
-    rowNumber++;
-    console.log(rowNumber);
+options = {
+    delimiter: '\t',
+    quote: '"',
+    escape: '"',
+    comment: '',
+    trim: true,
+    relax: true,
+    columns: true,
+    relax_column_count: true
+};
 
-        //console.dir(data);
-        //console.log(data);
-    //rowNumber = false;
-});
+// parse a CVS by the fileName
+var parseCVS = function(fileName) {
+    return new Promise(
+        function(resolve, reject) {
+            fs.createReadStream(fileName).pipe(parse(options,
+                (error, idsEntries) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(idsEntries)
+                    }
+                }
+            ));
+        }
+    )
+}
+
+// parseCVS(__dirname + '/SWITZERLAND.csv_org')
+// .then(function (idsEntries) {
+//     console.log(idsEntries[0].GUID);
+//     return idsEntries;
+// })
+// .catch(function (error) {
+//     console.error('An error occurred', error);
+// });
+
+var parsers = [
+    parseCVS(__dirname + '/SWITZERLAND.csv_org'),
+    parseCVS(__dirname + '/SWITZERLAND.csv')
+]
+
+Promise.all(parsers)
+    .then(contactArrays => {
+        var res = [];
+        for(var contacts of contactArrays){
+            console.log('result = ' + contacts[0].GUID);
+            res.push(contacts[0].GUID);
+        }
+        return res;
+    })
+    .then(guid0 =>{
+        Promise.all([
+            function(){return guid0[0]+'-'}(),
+            function(){return guid0[0]+'+'}(),
+        ])
+        .then(guids =>{
+            console.dir(guids);
+        })
+        console.dir(guid0);
+    })
+    .catch(err => {
+        console.log(err);
+    });

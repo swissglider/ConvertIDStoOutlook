@@ -15,7 +15,8 @@ var companyNames = ['Gutor Electronic LLC', 'Feller', 'Schneider Electric Switze
 var siteMainNumbers = ['+41 44 728 77 77', '+41 44 728 72 72',
                         '+41 31 917 33 33', '+41 62 737 32 32',
                         '+41 21 654 07 00', '+41 71 855 75 75',
-                        '+41 56 437 34 34']
+                        '+41 56 437 34 34'];
+var officeCountry = ['SWITZERLAND'];
 
 var parseOfficeNumber = function(number, countryCode) {
     console.log(number);
@@ -142,7 +143,8 @@ var parser = parse({
 
         // check if swiss OfficeCity --> set NotExport to true
         if(typeof siteNumberPrefixes[idsEntries[i].OfficeCity] === 'undefined'){
-            if(companyNames.indexOf(idsEntries[i].CompanyName) == -1 && idsEntries[i].OfficeCountry != 'SWITZERLAND')
+            if(companyNames.indexOf(idsEntries[i].CompanyName) == -1 ||
+                    officeCountry.indexOf(idsEntries[i].OfficeCountry) == -1)
                 idsEntries[i].NotExport = true;
         }
 
@@ -180,6 +182,8 @@ var parser = parse({
 
         if(idsEntries[i].NotExport)
             console.log(idsEntries[i].GUID + ' - ' + idsEntries[i].FirstName + '.' + idsEntries[i].LastName);
+        if(idsEntries[i].GUID == "SESA1093")
+            console.dir(idsEntries[i]);
     }
 });
 
