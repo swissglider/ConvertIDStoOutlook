@@ -1,9 +1,11 @@
 {
-  "PARSERS": [
-    {
-      "PARSER_NAME": "IDS_PARSER",
-      "PATH": "./parser/ids_parser.js",
-      "CONFIG_FILE": "configFiles/ids_config.json"
-    }
-  ]
+    "PARSERS": [{
+        "PARSER_NAME": "IDS_PARSER_CH",
+        "PATH": "./parser/ids_parser.js",
+        "CONFIG_FILE": "configFiles/ids_switzerland.json"
+    }, {
+        "PARSER_NAME": "IDS_PARSER_CH",
+        "PATH": "./parser/ids_parser.js",
+        "CONFIG_FILE": "configFiles/ids_switzerland_.json"
+    }]
 }

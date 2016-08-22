@@ -3,9 +3,11 @@ var config = require('./configFiles/main.json');
 
 var converter = new Converter(config);
 
-converter.startConvert();
-converter.parse();
-converter.mapRows();
-converter.convert();
-converter.filterRows();
-converter.save();
+converter.startConvert()
+    .then(result => {
+        console.log(result);
+    })
+    .catch(err => {
+        console.log('Error: ');
+        console.dir(err);
+    });
