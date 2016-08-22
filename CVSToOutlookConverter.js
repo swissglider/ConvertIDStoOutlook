@@ -21,19 +21,10 @@ CVSToOutlookConverter.prototype.startConvert = function() {
                     return [].concat.apply([], mappedContactArrays);;
                 })
         })
-        .then(mappedContactArray => {
-            // convert Rows
-            console.log('Converting started');
-            return this.convert(mappedContactArray);
-        })
-        .then(convertedContactArray => {
-            // filter Rows
-            console.log('Filtering started');
-            return this.filterRows(convertedContactArray);
-        })
         .then(filteredContactArray => {
             // save to new outputFile
             console.log('saving started');
+            console.dir(filteredContactArray[212]);
             return this.save(filteredContactArray);
         })
         .catch(err => {
@@ -59,18 +50,6 @@ CVSToOutlookConverter.prototype.getMapperFunctions = function() {
         mapFunctions.push(this.parsers[i].mapRows());
     }
     return mapFunctions;
-}
-
-// convert Numbers adresses etc
-// itareates over all converters
-CVSToOutlookConverter.prototype.convert = function(contactArray) {
-    return contactArray;
-}
-
-// filterRows
-// itareates over all filters
-CVSToOutlookConverter.prototype.filterRows = function(contactArray) {
-    return contactArray;
 }
 
 // save to new outputFile

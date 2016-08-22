@@ -1,6 +1,43 @@
 {
   "CVS_FILE": "/Users/diener/MEGAsync/Node.js.Project/ConvertIDStoOutlook/SWITZERLAND.csv_org",
   "MAPPING_TABLE": {
-    
-  }
+    "Vorname": "FirstName",
+    "Weitere Vornamen": "PreferredFirstName",
+    "Nachname": "LastName",
+    "Firma": "CompanyName",
+    "Abteilung": "Functionnal Area",
+    "Position": "JobTitle",
+    "Strasse geschäftlich": "OfficeStreetAddress",
+    "Ort geschäftlich": "OfficeCity",
+    "Postleitzahl geschäftlich": "OfficeZIP",
+    "Land/Region geschäftlich": "OfficeCountry",
+    "Telefon geschäftlich": "OfficePhoneNumber",
+    "Telefon geschäftlich 2": "OfficePhoneNumberExt",
+    "Telefon Firma": "AltOfficePhoneNumber",
+    "Mobiltelefon": "CellPhoneNumber",
+    "E-Mail-Adresse": "InternetAddress",
+    "Kategorien": "SE_Test_Categorie",
+    "Notizen": "IDS Contact",
+    "Organisationsnr.": "GUID",
+    "Beruf": "JobCode",
+    "Konto": "SECostCenter",
+    "Name des/r Vorgesetzten": "ManagerOrSEContact",
+    "Assistent(in)": "Assistant",
+    "Benutzer 1": "AlternateContact",
+    "Sprache": "PreferredLanguageCode"
+  },
+  "COMPANY_NAMES":["Gutor Electronic LLC","Feller","Schneider Electric Switzerland","M&C ENERGY AG", "PRO-FACE SCHWEIZ GmbH"],
+  "OFFICE_CITY":["Wettingen","Rorschacherberg","Renens","Oberentfelden","Ittigen","Horgen"],
+  "SIT_NUMBER_PREFIXES": {
+      "Horgen":{"country": "+41","kanton": "44","village": "728"},
+      "Ittigen":{"country": "+41","kanton": "31","village": "917"},
+      "Wettingen":{"country": "+41","kanton": "56","village": "437"},
+      "Oberentfelden":{"country": "+41","kanton": "62","village": "737"},
+      "Renens":{"country": "+41","kanton": "21","village": "654"},
+      "Rorschacherberg":{"country": "+41","kanton": "71","village": "858"}
+  },
+  "SITE_MAIN_NUMBER": ["+41 44 728 77 77", "+41 44 728 72 72",
+                      "+41 31 917 33 33", "+41 62 737 32 32",
+                      "+41 21 654 07 00", "+41 71 855 75 75",
+                      "+41 56 437 34 34"]
 }

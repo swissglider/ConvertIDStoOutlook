@@ -1,3 +1,29 @@
 {
-  "CVS_FILE": "/Users/diener/MEGAsync/Node.js.Project/ConvertIDStoOutlook/SWITZERLAND.csv"
+  "CVS_FILE": "/Users/diener/MEGAsync/Node.js.Project/ConvertIDStoOutlook/SWITZERLAND.csv",
+  "MAPPING_TABLE": {
+    "Vorname": "FirstName",
+    "Weitere Vornamen": "PreferredFirstName",
+    "Nachname": "LastName",
+    "Firma": "CompanyName",
+    "Abteilung": "Functionnal Area",
+    "Position": "JobTitle",
+    "Strasse geschäftlich": "OfficeStreetAddress",
+    "Ort geschäftlich": "OfficeCity / Location",
+    "Postleitzahl geschäftlich": "OfficeZIP",
+    "Land/Region geschäftlich": "OfficeCountry",
+    "Telefon geschäftlich": "OfficePhoneNumber",
+    "Telefon geschäftlich 2": "OfficePhoneNumberExt",
+    "Telefon Firma": "AltOfficePhoneNumber",
+    "Mobiltelefon": "CellPhoneNumber",
+    "E-Mail-Adresse": "InternetAddress",
+    "Kategorien": "SE_Test_Categorie",
+    "Notizen": "IDS Contact",
+    "Organisationsnr.": "GUID",
+    "Beruf": "JobCode",
+    "Konto": "SECostCenter",
+    "Name des/r Vorgesetzten": "ManagerOrSEContact",
+    "Assistent(in)": "Assistant",
+    "Benutzer 1": "AlternateContact",
+    "Sprache": "PreferredLanguageCode"
+  }
 }
