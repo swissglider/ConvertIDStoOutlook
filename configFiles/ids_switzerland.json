@@ -24,11 +24,12 @@
     "Name des/r Vorgesetzten": "ManagerOrSEContact",
     "Assistent(in)": "Assistant",
     "Benutzer 1": "AlternateContact",
-    "Sprache": "PreferredLanguageCode"
+    "Sprache": "PreferredLanguageCode",
+    "Internet Frei/Gebucht": ""
   },
   "COMPANY_NAMES":["Gutor Electronic LLC","Feller","Schneider Electric Switzerland","M&C ENERGY AG", "PRO-FACE SCHWEIZ GmbH"],
   "OFFICE_CITY":["Wettingen","Rorschacherberg","Renens","Oberentfelden","Ittigen","Horgen"],
-  "SIT_NUMBER_PREFIXES": {
+  "SITE_NUMBER_PREFIXES": {
       "Horgen":{"country": "+41","kanton": "44","village": "728"},
       "Ittigen":{"country": "+41","kanton": "31","village": "917"},
       "Wettingen":{"country": "+41","kanton": "56","village": "437"},
@@ -39,5 +40,6 @@
   "SITE_MAIN_NUMBER": ["+41 44 728 77 77", "+41 44 728 72 72",
                       "+41 31 917 33 33", "+41 62 737 32 32",
                       "+41 21 654 07 00", "+41 71 855 75 75",
-                      "+41 56 437 34 34"]
+                      "+41 56 437 34 34"],
+  "COUNTRY_MOBILE_NUMBERS": ["+41 76","+41 77","+41 78","+41 79"]
 }

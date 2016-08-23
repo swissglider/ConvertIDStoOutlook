@@ -1,36 +1,33 @@
+var generate = require('csv-generate');
+var stringify = require('csv-stringify');
+var fs = require('fs');
+
 var CVSToOutlookConverter = function(config) {
     this.config = config;
     this.parsers_config = config.PARSERS;
     this.parsers = [];
-    this.contacts = [];
 }
 
 CVSToOutlookConverter.prototype.startConvert = function() {
-    return Promise.all(/*parse Row */this.getParserFunctions())
+    return Promise.all( /*parse Row */ this.getParserFunctions())
         .then(contactArrays => {
-            console.log('Parsing done');
             return contactArrays;
         })
         .then(contactArrays => {
             // map Rows
-            console.log('Mapping started');
             return Promise.all(this.getMapperFunctions())
                 .then(mappedContactArrays => {
                     // merge all parsed and mapped contact-arrays
-                    console.log('Mapping done');
                     return [].concat.apply([], mappedContactArrays);;
                 })
         })
-        .then(filteredContactArray => {
+        .then(contactArray => {
             // save to new outputFile
-            console.log('saving started');
-            console.dir(filteredContactArray[212]);
-            return this.save(filteredContactArray);
+            return this.save(contactArray)
+                .then(function(result) {
+                    return result;
+                })
         })
-        .catch(err => {
-            console.log('Error: ');
-            console.dir(err);
-        });
 }
 
 CVSToOutlookConverter.prototype.getParserFunctions = function() {
@@ -54,7 +51,49 @@ CVSToOutlookConverter.prototype.getMapperFunctions = function() {
 
 // save to new outputFile
 CVSToOutlookConverter.prototype.save = function(contactArray) {
-    return 'all ok';
+    return this.stringify(contactArray)
+    .then(output => {
+        return this.writeToCSV(output)
+        .then(result =>{
+            return result;
+        })
+    })
+}
+
+CVSToOutlookConverter.prototype.stringify = function(contactArray) {
+    return new Promise(
+        function(resolve, reject) {
+            options = {
+                delimiter: ',',
+                quote: '"',
+                escape: '"',
+                header: true,
+                quoted: true,
+                quotedEmpty: true
+            };
+            stringify(contactArray, options,
+                (error, output) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(output);
+                    }
+                })
+        }.bind(this))
+}
+
+CVSToOutlookConverter.prototype.writeToCSV = function(output) {
+    return new Promise(
+        function(resolve, reject) {
+            fs.writeFile(__dirname + '/' + this.config.OUTPUT_CVS, output,
+                (error) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve('all ok-');
+                    }
+                })
+        }.bind(this))
 }
 
 module.exports = CVSToOutlookConverter;
